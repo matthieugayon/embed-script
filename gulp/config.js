@@ -1,9 +1,6 @@
 'use strict';
 
 export default {
-
-  browserPort: 4010,
-  UIPort: 4011,
   serverPort: 4012,
 
   sourceDir: './src/',

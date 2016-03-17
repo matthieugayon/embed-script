@@ -1,3 +1,3 @@
 import {Player} from './Player';
 
-window.Player = Player;
+window.ViewsayPlayer = Player;
