@@ -1,3 +1,3 @@
-import {Player} from './Player';
+import {Player} from './mixins/Player';
 
 window.ViewsayPlayer = Player;
