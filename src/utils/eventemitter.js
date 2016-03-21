@@ -10,7 +10,6 @@ class EventEmitter {
         this.listeners.has(label) || this.listeners.set(label, []);
         this.listeners.get(label).push(callback);
     }
-
     removeListener(label, callback) {
         let listeners = this.listeners.get(label),
             index;
@@ -29,6 +28,10 @@ class EventEmitter {
             }
         }
         return false;
+    }
+    removeAllListeners() {
+        this.listeners = null;
+        this.listeners = new Map();
     }
     emit(label, ...args) {
         let listeners = this.listeners.get(label);

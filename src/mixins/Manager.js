@@ -1,10 +1,18 @@
+import md5 from 'md5';
+import { addClass, removeClass } from '../utils/dom';
+
 export const Manager = base => class extends base {
     constructor(id) {
         super();
         this.validateClientContainer(id);
+        this.addMessageListener();
         this.createIframeContainer();
         this.createPseudoElementStyleSheet();
         this.styleIframeContainer();
+
+        this.addListener('resizeIframeContainer', (responsiveCases) => {
+            this.resizeIframeContainer(responsiveCases);
+        });
     }
     validateClientContainer(id) {
         if (!id) {
@@ -19,6 +27,13 @@ export const Manager = base => class extends base {
 
         //store id as "private" property
         this._id = id;
+        //store a hashed version for clean namespacing of player instances
+        this._hashedId = md5(id);
+    }
+    addMessageListener() {
+        window.addEventListener("message", (event) => {
+            this.emit('message', event);
+        });
     }
     createIframeContainer() {
         const iframeContainer = document.createElement('div'),
@@ -29,10 +44,24 @@ export const Manager = base => class extends base {
 
         this._iframeContainer = iframeContainer;
     }
-    styleIframeContainer(responsiveCase) {
+    styleIframeContainer() {
         // if (responsiveCase) cases
         this._iframeContainer.setAttribute("class",'viewsay-client-container viewsay-client-container-default');
         this._iframeContainer.setAttribute('style', 'position : relative;');
+    }
+    resizeIframeContainer(responsiveCases) {
+        const iframeContainer = this._iframeContainer,
+            cssClassList = new Map([['default','viewsay-client-container-default'],
+                ['lg', 'viewsay-client-container-lg'],
+                ['md', 'viewsay-client-container-md'],
+                ['xs', 'viewsay-client-container-xs']]);
+
+        if (!cssClassList.has(responsiveCases)) return;
+
+        for (const cssClass of cssClassList.values()) {
+            removeClass(iframeContainer, cssClass);
+        }
+        addClass(iframeContainer, cssClassList.get(responsiveCases));
     }
     createPseudoElementStyleSheet(){
         let style = document.getElementById('viewsay-generated-styles');
@@ -46,6 +75,11 @@ export const Manager = base => class extends base {
         document.head.appendChild(style);
 
         const sheet = style.sheet;
+
+        // insert here rules fro different responsive cases;
         sheet.insertRule('.viewsay-client-container-default::after { content: ""; display: block; padding-top: 56.25%; }',0);
+    }
+    destroy() {
+        this.removeAllListeners();
     }
 }

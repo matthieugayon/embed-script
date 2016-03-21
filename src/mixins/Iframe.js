@@ -6,6 +6,9 @@ export const Iframe = base => class extends base {
         const iframeSrc = this.buildIframeUrl(),
             iframe = this.buildIframe(iframeSrc);
 
+        //store iframe DOM object reference
+        this._iframe = iframe;
+
         this.styleIframe(iframe);
         this.appendIframe(iframe);
     }
@@ -33,8 +36,11 @@ export const Iframe = base => class extends base {
     }
     buildIframeUrl() {
         const options = this._options,
+            hashedId = this._hashedId,
             iframeSrc = options.appDomain + "/partner/" +
                 + encodeURIComponent(options.account)
+                + "/"
+                + encodeURIComponent(hashedId)
                 + "/videos/"
                 + encodeURIComponent(options.player)
                 + "/"
