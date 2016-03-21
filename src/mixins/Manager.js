@@ -34,10 +34,18 @@ export const Manager = base => class extends base {
         this._iframeContainer.setAttribute("class",'viewsay-client-container viewsay-client-container-default');
         this._iframeContainer.setAttribute('style', 'position : relative;');
     }
-    createPseudoElementStyleSheet() {
-        const style = document.createElement("style");
+    createPseudoElementStyleSheet(){
+        let style = document.getElementById('viewsay-generated-styles');
+
+        // if already created don't do anything
+        if (style) return;
+
+        // otherwise we create the style tag and so on
+        style = document.createElement("style");
+        style.setAttribute('id', 'viewsay-generated-styles');
         document.head.appendChild(style);
+
         const sheet = style.sheet;
-        sheet.insertRule('.viewsay-client-container-default::after { content: ""; display: block; padding-top: 56.25%%; }');
+        sheet.insertRule('.viewsay-client-container-default::after { content: ""; display: block; padding-top: 56.25%; }',0);
     }
 }
