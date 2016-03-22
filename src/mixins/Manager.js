@@ -52,9 +52,9 @@ export const Manager = base => class extends base {
     resizeIframeContainer(responsiveCases) {
         const iframeContainer = this._iframeContainer,
             cssClassList = new Map([['default','viewsay-client-container-default'],
-                ['lg', 'viewsay-client-container-lg'],
-                ['md', 'viewsay-client-container-md'],
-                ['xs', 'viewsay-client-container-xs']]);
+                ['large', 'viewsay-client-container-large'],
+                ['small', 'viewsay-client-container-small'],
+                ['portrait', 'viewsay-client-container-portrait']]);
 
         if (!cssClassList.has(responsiveCases)) return;
 
@@ -77,7 +77,10 @@ export const Manager = base => class extends base {
         const sheet = style.sheet;
 
         // insert here rules fro different responsive cases;
-        sheet.insertRule('.viewsay-client-container-default::after { content: ""; display: block; padding-top: 56.25%; }',0);
+        sheet.insertRule('.viewsay-client-container-default::after { content: ""; display: block; padding-top: 47%; }',0);
+        sheet.insertRule('.viewsay-client-container-large::after { content: ""; display: block; padding-top: 47%; }',0);
+        sheet.insertRule('.viewsay-client-container-small::after { content: ""; display: block; padding-top: 43%; }',0);
+        sheet.insertRule('.viewsay-client-container-portrait::after { content: ""; display: block; padding-top: 180%; }',0);
     }
     destroy() {
         this.removeAllListeners();
