@@ -25,14 +25,15 @@ export const Iframe = base => class extends base {
             throw new TypeError("videoId option is missing");
         }
 
-        options.appDomain = options.appDomain || 'http://localhost:3010';
-
         //store options as "private" properties
         this._options = options;
     }
     sortOptions() {
         // TODO : sort styling options etc
         const options = this._options;
+
+        // default appDomain to localhost:3012
+        options.appDomain = options.appDomain || 'http://localhost:3012';
     }
     buildIframeUrl() {
         const options = this._options,
