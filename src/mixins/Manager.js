@@ -77,10 +77,10 @@ export const Manager = base => class extends base {
         const sheet = style.sheet;
 
         // insert here rules fro different responsive cases;
-        sheet.insertRule('.viewsay-client-container-default::after { content: ""; display: block; padding-top: 47%; }',0);
-        sheet.insertRule('.viewsay-client-container-large::after { content: ""; display: block; padding-top: 47%; }',0);
-        sheet.insertRule('.viewsay-client-container-small::after { content: ""; display: block; padding-top: 43%; }',0);
-        sheet.insertRule('.viewsay-client-container-portrait::after { content: ""; display: block; padding-top: 180%; }',0);
+        sheet.insertRule('.viewsay-client-container-default::after { content: ""; display: block; padding-top: 56.5%; }',0);
+        sheet.insertRule('.viewsay-client-container-large::after { content: ""; display: block; padding-top: 56.5%; }',0);
+        sheet.insertRule('.viewsay-client-container-small::after { content: ""; display: block; padding-top: 56.5%; }',0);
+        sheet.insertRule('.viewsay-client-container-portrait::after { content: ""; display: block; padding-top: 130%; }',0);
     }
     destroy() {
         this.removeAllListeners();
