@@ -33,12 +33,12 @@ export const Iframe = base => class extends base {
         const options = this._options;
 
         // default appDomain to localhost:3012
-        options.appDomain = options.appDomain || 'http://localhost:3012';
+        options.commentpaneDomain = '/* @echo commentpaneDomain */';
     }
     buildIframeUrl() {
         const options = this._options,
             hashedId = this._hashedId,
-            iframeSrc = options.appDomain + "/partner/" + encodeURIComponent(options.account)
+            iframeSrc = options.commentpaneDomain + "/partner/" + encodeURIComponent(options.account)
                 + "/"
                 + encodeURIComponent(hashedId)
                 + "/videos/"

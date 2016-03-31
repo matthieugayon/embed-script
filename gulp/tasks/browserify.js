@@ -31,7 +31,6 @@ function buildScript(file) {
 
   if ( !global.isProd ) {
     bundler = watchify(bundler);
-
     bundler.on('update', function() {
       rebundle();
       gutil.log('Rebundle...');
