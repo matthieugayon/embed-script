@@ -8,7 +8,8 @@ gulp.task('prod', ['clean'], function(cb) {
   cb = cb || function() {};
 
   global.isProd = true;
+  global.env = 'production';
 
-  runSequence('browserify', 'gzip', cb);
+  runSequence('browserify', 'gzip', 'preprocess', 'deploy', cb);
 
 });
