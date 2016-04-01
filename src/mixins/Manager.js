@@ -80,7 +80,7 @@ export const Manager = base => class extends base {
         sheet.insertRule('.viewsay-client-container-default::after { content: ""; display: block; padding-top: 56.5%; }',0);
         sheet.insertRule('.viewsay-client-container-large::after { content: ""; display: block; padding-top: 56.5%; }',0);
         sheet.insertRule('.viewsay-client-container-small::after { content: ""; display: block; padding-top: 56.5%; }',0);
-        sheet.insertRule('.viewsay-client-container-portrait::after { content: ""; display: block; padding-top: 130%; }',0);
+        sheet.insertRule('.viewsay-client-container-portrait::after { content: ""; display: block; padding-top: 56.5%; padding-bottom: 300px; }',0);
     }
     destroy() {
         this.removeAllListeners();
