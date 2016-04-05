@@ -24,10 +24,10 @@ export default {
       commentpaneDomain : 'http://localhost:3012'
     },
     staging : {
-      commentpaneDomain : 'https://commentpane-staging.viewsay.com'
+      commentpaneDomain : 'https://partner-staging.viewsay.com'
     },
     production : {
-      commentpaneDomain : 'https://commentpane.viewsay.com'
+      commentpaneDomain : 'https://partner.viewsay.com'
     }
   },
 

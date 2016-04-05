@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="example.css">
 
 		<!-- local embed script is ran on port 4012, run it from the viewsay-embed-script repo with gulp dev -->
-		<script src="http://localhost:4012/main.js"></script>
+		<script src="https://embed-staging.viewsay.com/viewsayIframeApi.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -58,20 +58,16 @@
 			</div>
 		</div>
 		<script>
-			// matthieu : this an account working for my local env, you'll need to change it to match one of yours
 			var viewsay_example_player = new ViewsayPlayer('viewsay-example', {
-				account : '565e1f928d8c4fdb86375562',
+				account : '561054fd22b41afc55d9614a',
 				player : 'youtube',
 				videoId : 'oZRh6J9ezfw'
-				//videoId : '565e1f928d8c4fdb86375566'
-				//videoId : '566082f2145a776d38a98358' // tom's ref
 			});
-			/*var viewsay_example_player_two = new ViewsayPlayer('viewsay-example-two', {
-				account : '565e1f928d8c4fdb86375562',
+			var viewsay_example_player_two = new ViewsayPlayer('viewsay-example-two', {
+				account : '561054fd22b41afc55d9614a',
 				player : 'youtube',
 				videoId : 'phLbxHgjtZQ',
-				//videoId : '56608594145a776d38a9835c'
-			});*/
+			});
 		</script>
 	</body>
 </html>

@@ -12,6 +12,7 @@ import watchify     from 'watchify';
 import browserify   from 'browserify';
 import babelify     from 'babelify';
 import uglify       from 'gulp-uglify';
+import rename       from 'gulp-rename';
 import handleErrors from '../util/handleErrors';
 
 function createSourcemap() {
@@ -51,6 +52,7 @@ function buildScript(file) {
         compress: { drop_console: true }
       }))))
       .pipe(gulpif(createSourcemap(), sourcemaps.write(sourceMapLocation)))
+      .pipe(rename('viewsayIframeApi.js'))
       .pipe(gulp.dest(config.scripts.dest));
   }
 
