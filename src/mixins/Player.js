@@ -23,7 +23,8 @@ class Player extends Iframe(Manager(EventEmitter)) {
                 switch (dataObj.message.action) {
                     case 'onReady':
 
-                        console.log('player Ready');
+                        const onReadyAction = dataObj.message.action;
+                        console.log('player Ready : trigger action', onReadyAction);
 
                         break;
                     case 'resize':
