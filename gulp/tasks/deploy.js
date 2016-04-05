@@ -24,7 +24,8 @@ gulp.task('deploy', function() {
         "distributionId": distributionId,
         "params": {
             "Bucket" : bucket
-        }
+        },
+        "patternIndex": /^\/viewsayIframeApi\.[a-f0-9]{8}\.js(\.gz)*$/gi
     };
 
     var publisher = awspublish.create(aws),
