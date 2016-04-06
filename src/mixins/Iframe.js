@@ -38,7 +38,7 @@ export const Iframe = base => class extends base {
     buildIframeUrl() {
         const options = this._options,
             hashedId = this._hashedId,
-            iframeSrc = options.commentpaneDomain + "/partner/" + encodeURIComponent(options.account)
+            iframeSrc = options.commentpaneDomain + "/#!partner/" + encodeURIComponent(options.account)
                 + "/"
                 + encodeURIComponent(hashedId)
                 + "/videos/"
