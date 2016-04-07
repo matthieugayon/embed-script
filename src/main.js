@@ -1,3 +1,4 @@
+import "babel-polyfill";
 import {Player} from './mixins/Player';
 
 // expose player Class publicaly

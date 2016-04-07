@@ -63,9 +63,10 @@
     "watchify": "^3.4.0"
   },
   "dependencies": {
+    "babel-polyfill": "^6.7.4",
+    "md5": "2.1.0",
     "morgan": "^1.2.2",
-    "underscore": "^1.8.3",
-    "md5": "2.1.0"
+    "underscore": "^1.8.3"
   },
   "scripts": {
     "start": "node server.js",
