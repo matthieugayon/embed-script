@@ -8,6 +8,8 @@ gulp.task('watch', ['server'], function() {
   global.isWatching = true;
 
   // Scripts are automatically watched and rebundled by Watchify inside Browserify task
-  gulp.watch(config.scripts.src, ['lint']);
+
+  //TODO re include here lint and lint the whole project
+  gulp.watch(config.scripts.src, ['preprocess']);
 
 });

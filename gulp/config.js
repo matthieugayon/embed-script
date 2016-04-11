@@ -20,6 +20,10 @@ export default {
   preprocess : {
     src: ['./build/*.js'],
     dest: 'build/',
+    example : {
+      src: ['./example/src/*.html'],
+      dest: 'example/',
+    },
     development : {
       commentpaneDomain : 'http://localhost:3012'
     },

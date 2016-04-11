@@ -12,8 +12,8 @@ class Player extends Iframe(Manager(EventEmitter)) {
     receiveMessage(event) {
         const hashedId = this._hashedId,
             data = event.data || event.detail,
-            iframeObj = this._iframe,
-            validSource = (iframeObj && event.isTrusted && event.source === iframeObj.contentWindow);
+            origin = event.origin,
+            validSource = (origin === this._options.commentpaneDomain);
 
         if (data[0] === '{' && validSource) {
             const dataObj = JSON.parse(data);

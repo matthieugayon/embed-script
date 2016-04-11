@@ -13,6 +13,7 @@ import browserify   from 'browserify';
 import babelify     from 'babelify';
 import uglify       from 'gulp-uglify';
 import rename       from 'gulp-rename';
+import runSequence  from 'run-sequence';
 import handleErrors from '../util/handleErrors';
 
 function createSourcemap() {
@@ -32,9 +33,15 @@ function buildScript(file) {
 
   if ( !global.isProd ) {
     bundler = watchify(bundler);
+
     bundler.on('update', function() {
       rebundle();
       gutil.log('Rebundle...');
+    });
+
+    bundler.on('log', function () {
+      // re run preprocess task after rebundling
+      runSequence('preprocess');
     });
   }
 

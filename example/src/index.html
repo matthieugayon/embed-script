@@ -11,9 +11,17 @@
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="example.css">
 
+		<!-- @if NODE_ENV='production' -->
+		<script src="https://embed.viewsay.com"></script>
+		<!-- @endif -->
 
+		<!-- @if NODE_ENV='staging' -->
+		<script src="https://embed-staging.viewsay.com"></script>
+		<!-- @endif -->
 
+		<!-- @if NODE_ENV='development' -->
 		<script src="http://localhost:4012/viewsayIframeApi.js"></script>
+		<!-- @endif -->
 	</head>
 	<body>
 		<div class="container">
@@ -60,8 +68,37 @@
 			</div>
 		</div>
 
+		<!-- @if NODE_ENV='production' -->
+		<script>
+			var viewsay_example_player = new ViewsayPlayer('viewsay-example', {
+				account : '561054fd22b41afc55d9614a',
+				player : 'youtube',
+				videoId : 'PH8JuizIXw8'
+			});
+			var viewsay_example_player_two = new ViewsayPlayer('viewsay-example-two', {
+				account : '561054fd22b41afc55d9614a',
+				player : 'youtube',
+				videoId : 'PH8JuizIXw8',
+			});
+		</script>
+		<!-- @endif -->
 
+		<!-- @if NODE_ENV='staging' -->
+		<script>
+			var viewsay_example_player = new ViewsayPlayer('viewsay-example', {
+				account : '561054fd22b41afc55d9614a',
+				player : 'youtube',
+				videoId : 'PH8JuizIXw8'
+			});
+			var viewsay_example_player_two = new ViewsayPlayer('viewsay-example-two', {
+				account : '561054fd22b41afc55d9614a',
+				player : 'youtube',
+				videoId : 'PH8JuizIXw8',
+			});
+		</script>
+		<!-- @endif -->
 
+		<!-- @if NODE_ENV='development' -->
 		<script>
 			var viewsay_example_player = new ViewsayPlayer('viewsay-example', {
 				account : '565e1f928d8c4fdb86375562',
@@ -74,5 +111,6 @@
 				videoId : 'PH8JuizIXw8',
 			});
 		</script>
+		<!-- @endif -->
 	</body>
 </html>
