@@ -8,6 +8,6 @@ gulp.task('dev', ['clean'], function(cb) {
   global.isProd = false;
   global.env = 'development';
 
-  runSequence('browserify', 'preprocess', 'watch', cb);
+  runSequence('browserify', 'watch', cb);
 
 });
