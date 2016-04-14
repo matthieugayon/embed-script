@@ -25,6 +25,16 @@ export const Iframe = base => class extends base {
             throw new TypeError("videoId option is missing");
         }
 
+        // hex color validation
+        const colorRegExp = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+        if (options.style && Object.keys(options.style).length) {
+            for (const color in options.style) {
+                if (!options.style[color].match(colorRegExp)) {
+                    throw new TypeError(color + " must be precised in HEX css color format. Example : #fff or #ffffff");
+                }
+            }
+        }
+
         //store options as "private" properties
         this._options = options;
     }
@@ -32,13 +42,14 @@ export const Iframe = base => class extends base {
         // TODO : sort styling options etc
         const options = this._options;
 
-        // default appDomain to localhost:3012
+        // PRE PROCESS : default appDomain to localhost:3012
         options.commentpaneDomain = '/* @echo commentpaneDomain */';
     }
     buildIframeUrl() {
         const options = this._options,
-            hashedId = this._hashedId,
-            iframeSrc = options.commentpaneDomain + "/#!partner/" + encodeURIComponent(options.account)
+            hashedId = this._hashedId;
+
+        let iframeSrc = options.commentpaneDomain + "/#!partner/" + encodeURIComponent(options.account)
                 + "/"
                 + encodeURIComponent(hashedId)
                 + "/videos/"
@@ -47,6 +58,16 @@ export const Iframe = base => class extends base {
                 + encodeURIComponent(options.videoId)
                 + "/"
                 + encodeURIComponent(window.btoa(window.location.href));
+
+        if (options.style) {
+            let query = "";
+            for (const color in options.style) {
+                query += '&' + color + '=' + encodeURIComponent(options.style[color]);
+            }
+            // remove first ampersand and add ? instead;
+            query = '?' + query.slice(1);
+            iframeSrc = iframeSrc + query;
+        }
 
         return iframeSrc;
     }

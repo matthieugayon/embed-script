@@ -1,10 +1,17 @@
 import md5 from 'md5';
-import { addClass, removeClass } from '../utils/dom';
+import { addClass, removeClass, getElementInnerWidth } from '../utils/dom';
+import { getClosestClass } from '../utils/array';
 
 export const Manager = base => class extends base {
     constructor(id) {
         super();
         this.validateClientContainer(id);
+
+        // set new Map containing our class / keypoints pairs
+        this._classList = new Map([['large', { className : 'viewsay-client-container-large', minimumWidth : 1024}],
+            ['small', { className : 'viewsay-client-container-small', minimumWidth : 769}],
+            ['portrait', { className : 'viewsay-client-container-portrait', minimumWidth : 0}]]);
+
         this.addMessageListener();
         this.createIframeContainer();
         this.createPseudoElementStyleSheet();
@@ -45,23 +52,27 @@ export const Manager = base => class extends base {
         this._iframeContainer = iframeContainer;
     }
     styleIframeContainer() {
-        // if (responsiveCase) cases
-        this._iframeContainer.setAttribute("class",'viewsay-client-container viewsay-client-container-default');
+        // get initial container width to rty to apply directly the right classname
+        const IframeContainerWidth = getElementInnerWidth(this._iframeContainer.parentElement);
+        let startupClassName = 'viewsay-client-container-large';
+
+        if (IframeContainerWidth !== 0) {
+            startupClassName = getClosestClass(this._classList, IframeContainerWidth).className;
+        }
+
+        this._iframeContainer.setAttribute("class",'viewsay-client-container ' + startupClassName);
         this._iframeContainer.setAttribute('style', 'position : relative;');
     }
     resizeIframeContainer(responsiveCases) {
         const iframeContainer = this._iframeContainer,
-            cssClassList = new Map([['default','viewsay-client-container-default'],
-                ['large', 'viewsay-client-container-large'],
-                ['small', 'viewsay-client-container-small'],
-                ['portrait', 'viewsay-client-container-portrait']]);
+            cssClassList = this._classList;
 
         if (!cssClassList.has(responsiveCases)) return;
 
         for (const cssClass of cssClassList.values()) {
-            removeClass(iframeContainer, cssClass);
+            removeClass(iframeContainer, cssClass.className);
         }
-        addClass(iframeContainer, cssClassList.get(responsiveCases));
+        addClass(iframeContainer, cssClassList.get(responsiveCases).className);
     }
     createPseudoElementStyleSheet(){
         let style = document.getElementById('viewsay-generated-styles');
@@ -77,7 +88,6 @@ export const Manager = base => class extends base {
         const sheet = style.sheet;
 
         // insert here rules fro different responsive cases;
-        sheet.insertRule('.viewsay-client-container-default::after { content: ""; display: block; padding-top: 56.5%; }',0);
         sheet.insertRule('.viewsay-client-container-large::after { content: ""; display: block; padding-top: 56.5%; }',0);
         sheet.insertRule('.viewsay-client-container-small::after { content: ""; display: block; padding-top: 56.5%; }',0);
         sheet.insertRule('.viewsay-client-container-portrait::after { content: ""; display: block; padding-top: 56.5%; padding-bottom: 300px; }',0);
